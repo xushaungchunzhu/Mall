@@ -6,7 +6,7 @@
     <div v-else class="item-active-icon">
       <slot name="icon-active"></slot>
     </div>
-    <div class="item-text">
+    <div class="item-text" :style="activeStyle">
       <slot name="text"></slot>
     </div>
   </div>
@@ -23,8 +23,12 @@ export default {
   },
   computed: {
     isActive() {
-      return false;
+      return this.$route.path.indexOf(this.link) !== -1;
+    },
+    activeStyle() {
+      return this.isActive? {color: "deepPink"} : {}
     }
+
   },
   methods: {
     itemClick() {
@@ -48,6 +52,5 @@ export default {
   .item-text {
     font-size: 12px;
     margin-top: 3px;
-    color: #333;
   }
 </style>
